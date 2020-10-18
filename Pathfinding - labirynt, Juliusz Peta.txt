@@ -1,0 +1,56 @@
+#Pathfinder
+!pip install pathfinding
+from pathfinding.core.diagonal_movement import DiagonalMovement 
+from pathfinding.core.grid import Grid as gd
+from pathfinding.finder.a_star import AStarFinder 
+#Numpy
+import numpy as np
+import matplotlib.pyplot as plt
+
+matrix = np.array([[0, 0, 0, 0, 0, 1],
+                 [0, 0, 0, 0, 0, 1],
+                 [0, 0, 0, 0, 0, 1],
+                 [0, 0, 0, 0, 0, 1],
+                 [0, 0, 0, 1, 1, 1],
+                 [0, 0, 0, 1, 0, 0],
+                 [0, 0, 0, 1, 0, 0],
+                 [1, 1, 1, 1, 0, 0]])
+
+#Grid creation
+grid = gd(matrix=matrix)
+start = grid.node(0, 0)
+end = grid.node(5, 5)
+
+#Using built-in algorithms
+finder = AStarFinder(diagonal_movement=DiagonalMovement.always)
+path, runs = finder.find_path(start, end, grid)
+
+#Printing results
+print('operations count:', runs, 'path length:', len(path))
+print(grid.grid_str(path=path, start=start, end=end))
+
+plt.figure(figsize=(8, 8))
+plt.imshow(matrix)
+plt.clim(0, 4)
+plt.colorbar()
+
+#def find_path(maze):
+ # np.argwhere(x=2)
+  #np.argwhere(x=3)
+  #Tutaj umieść swój kod, który zapisze labirynt ze znalezioną ścieżką
+  #do zmiennej maze_with_path
+
+  #return maze_with_path
+
+#maze_with_path = find_path(maze)
+
+#plt.figure(figsize=(8, 8))
+#plt.imshow(maze_with_path)
+#plt.clim(0, 4)
+#plt.colorbar()
+
+#Zmodyfikowałem pathfindera u siebie lokalnie
+#zmieniłem plik grid.py z catalogu core pathfindera;
+#usunąłem znaki 's' oraz 'e'
+#zmieniłem tablicę tak, aby była obsługiwana przez pathfindera
+#więcej nie udało mi się wykminić :(
