@@ -1,0 +1,41 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from PIL import Image
+
+def load_image(filename):
+  im = np.array(Image.open('zad2_1.jpg')).mean(axis=2)/255
+  return im
+
+def draw_image(im):
+  plt.figure(figsize=(12,9))
+  plt.imshow(im, cmap='gray')
+  plt.clim(0, 1)
+  plt.colorbar()
+
+im = load_image('zad2_1.jpg')
+plt.imshow(im, cmap='gray')
+plt.clim(0, 1)
+plt.colorbar()
+plt.show()
+
+#konwersja do skali szarości
+im_gray = np.mean(im, axis = 2)/255.0
+
+#zwiększenie kontrastu
+contrast = im_gray * 1.4
+plt.subplot(1,2,2)
+plt.imshow(constrast, cmap='gray')
+plt.clim(0, 1)
+plt.colorbar()
+plt.title('Poprawiony kontrast')
+
+#Korekcja gamma
+gamma = im_gray**0.6
+
+plt.figure(figsize=(12, 6))
+
+plt.subplot(1,2,2)
+plt.imshow(gamma, cmap='gray')
+plt.clim(0, 1)
+plt.colorbar()
+plt.title('Poprawione wartości gamma')
